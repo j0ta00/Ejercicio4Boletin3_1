@@ -10,7 +10,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn1,btn2;
     private ImageView img;
-    private int idImages[]={R.drawable.descarga,R.drawable.p};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(x->cambiarImagen());
     }
 
-    public void cambiarImagen(){
+    public void cambiarImagen() {
         if (img.getTag() == "descarga") {
             img.setImageResource(R.drawable.p);
             img.setTag("p");
