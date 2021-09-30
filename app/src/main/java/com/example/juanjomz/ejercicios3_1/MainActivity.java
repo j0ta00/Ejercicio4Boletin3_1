@@ -8,30 +8,43 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn1,btn2;
+    private Button btnLeft,btnRight;
     private ImageView img;
+    private int[] imagesId;
+    private int positionImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        positionImg=1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        img=(ImageView)findViewById(R.id.imageView);
-        img.setImageResource(R.drawable.descarga);
-        img.setTag("descarga");
-        btn1=findViewById(R.id.button);
-        btn1.setOnClickListener(x->cambiarImagen());
-        btn2=findViewById(R.id.button2);
-        btn2.setOnClickListener(x->cambiarImagen());
+        img=findViewById(R.id.imageView);
+        btnLeft=findViewById(R.id.btnLeft);
+        btnRight=findViewById(R.id.btnRight);
+        imagesId= new int[]{R.drawable.manchon,R.drawable.android,R.drawable.gafas};
+        img.setImageResource(imagesId[positionImg]);
+        btnRight.setOnClickListener(x->cambiarImagenHaciaLaDerecha());
+        btnLeft.setOnClickListener(x->cambiarImagenHaciaLaIzquierda());
     }
 
-    public void cambiarImagen() {
-        if (img.getTag() == "descarga") {
-            img.setImageResource(R.drawable.p);
-            img.setTag("p");
-        } else {
-            img.setImageResource(R.drawable.descarga);
-            img.setTag("descarga");
+    public void cambiarImagenHaciaLaDerecha() {
+        int idImage=0;
+        if(imagesId[imagesId.length-1]==imagesId[positionImg]){
+            idImage=imagesId[0];
+            positionImg=0;
+        }else{
+            idImage=imagesId[++positionImg];
         }
-
+        img.setImageResource(idImage);
+    }
+    public void cambiarImagenHaciaLaIzquierda() {
+        int idImage=0;
+        if(imagesId[0]==imagesId[positionImg]){
+            idImage=imagesId[imagesId.length-1];
+            positionImg=imagesId.length-1;
+        }else{
+            idImage=imagesId[--positionImg];
+        }
+        img.setImageResource(idImage);
     }
 }
